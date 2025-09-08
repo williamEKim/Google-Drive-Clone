@@ -5,6 +5,7 @@
 		"skipLibCheck": true,
 		"target": "es2022",
 		"allowJs": true,
+		"checkJs": false, // don't type-check JS files
 		"resolveJsonModule": true,
 		"moduleDetection": "force",
 		"isolatedModules": true,
@@ -38,5 +39,8 @@
 		"**/*.js",
 		".next/types/**/*.ts"
 	],
-	"exclude": ["node_modules"]
+	"exclude": [
+		"node_modules",
+		"eslint.config.js" // ignore ESLint config
+	]
 }
