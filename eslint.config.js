@@ -1,15 +1,13 @@
-// eslint.config.js
-import { FlatCompat } from "@eslint/eslintrc";
+// eslint.config.js (ESM)
+import { dirname } from "path";
+import { fileURLToPath } from "url";
 
-const compat = new FlatCompat({ baseDirectory: __dirname });
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default [
-  ...compat.extends("eslint:recommended"),
-  ...compat.extends("plugin:@typescript-eslint/recommended"),
-  ...compat.extends("next/core-web-vitals"),
   {
-    rules: {
-      // your custom rules here
-    },
+    files: ["**/*.{js,ts,jsx,tsx}"],
+    ignores: ["node_modules", ".next"],
+    extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   },
 ];
