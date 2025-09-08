@@ -7,28 +7,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout code
       - name: Checkout
         uses: actions/checkout@v2
 
+      # 2️⃣ Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '22'
-          cache: 'pnpm'
 
-      # Use the built-in way to install pnpm via Corepack
-      - name: Enable pnpm via Corepack
+      # 3️⃣ Enable pnpm via Corepack (guaranteed on PATH)
+      - name: Enable pnpm
         run: corepack enable && corepack prepare pnpm@latest --activate
 
+      # 4️⃣ Install dependencies (ignore frozen-lockfile)
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
 
+      # 5️⃣ Copy .env.example files (optional, if you don't use secrets)
       - name: Copy .env.example files
         shell: bash
         run: find . -type f -name ".env.example" -exec sh -c 'cp "$1" "${1%.*}"' _ {} \;
 
+      # 6️⃣ Typecheck
       - name: Typecheck
         run: pnpm typecheck
 
+      # 7️⃣ Lint
       - name: Lint
         run: pnpm lint
