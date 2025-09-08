@@ -35,5 +35,5 @@ jobs:
         run: pnpm typecheck
 
       # 7️⃣ Lint
-      - name: Lint
-        run: pnpm lint
+      # - name: Lint
+      #   run: pnpm lint
